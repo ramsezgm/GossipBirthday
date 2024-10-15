@@ -1,100 +1,249 @@
-import Image from "next/image";
+"use client";
+
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { FaMapMarkerAlt, FaFilePdf } from "react-icons/fa";
+
+interface CarouselItem {
+  image: string;
+  description: string;
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const items: CarouselItem[] = [
+    { image: '/ale6.jpg', description: 'Sixth image' },
+    { image: '/ale3.jpg', description: 'Third image' },
+    { image: '/ale2.jpg', description: 'Second image' },
+    { image: '/ale5.jpg', description: 'Fifth image' },
+    { image: '/ale4.jpg', description: 'Fourth image' },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    vertical: false,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  return (
+    <div className="bg-black text-white min-h-screen">
+      {/* Sección con imagen de fondo */}
+      <div
+        className="relative flex flex-col justify-center items-center h-[50vh] w-full"
+        style={{
+          backgroundImage: "url('/cityhd-bg.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Gradiente */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+        <h1 className="text-5xl sm:text-7xl md:text-9xl gossip-title relative z-10 pt-10 sm:pt-20">
+          gossip girl
+        </h1>
+        <nav className="py-5 sm:py-10 flex justify-evenly w-full text-md sm:text-lg md:text-xl text-white relative z-10 nav-bright">
+          <a href="#home" className="hover:text-gray-400">Home</a>
+          <a href="#pics" className="hover:text-gray-400">Pics</a>
+          <a href="#party" className="hover:text-gray-400">Party</a>
+        </nav>
+      </div>
+
+      {/* Sección Home */}
+      <section id="home" className="relative p-5 sm:p-10 md:p-20 space-y-8 flex flex-col sm:flex-row justify-center items-center min-h-screen bg-black smoke-effect">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-100 to-black opacity-10 pointer-events-none animate-smoke"></div>
+        <div className="relative flex items-start space-x-0 sm:space-x-10 md:space-x-20 max-w-4xl sm:max-w-7xl w-full z-10 flex-col sm:flex-row">
+          <div className="w-full sm:w-2/3">
+            <img src="ale1.jpg" alt="Image description" className="rounded-3xl shadow-lg w-full" />
+          </div>
+          <div className="flex flex-col w-full sm:w-2/3 mt-10 sm:mt-44">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl mb-4 sm:mb-8 text-center text-outlined">Happy Birthday, A!</h2>
+            <div className="bg-white p-5 sm:p-10 rounded-lg shadow-lg max-w-full sm:max-w-2xl">
+              <p className="text-md sm:text-lg md:text-2xl mb-4 sm:mb-6 text-black text-justify">
+                "Spotted! A spectacular party is approaching. Gossip Girl here, your one and only source into the scandalous lives of Panama's elite. The secret’s out, and it's a big one! A’s 21st birthday bash is said to be at... Stay tuned, darlings."
+              </p>
+            </div>
+            <p className="text-lg sm:text-2xl md:text-3xl mt-4 sm:mt-6 text-outlined">XOXO, Gossip Girl</p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Sección Pics replicada */}
+      <section id="pics" className="relative p-5 sm:p-10 md:p-20 space-y-8 flex flex-col sm:flex-col justify-center items-center min-h-screen bg-black smoke-effect">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-100 to-black opacity-10 pointer-events-none animate-smoke"></div>
+
+        {/* Slider con las imágenes */}
+        <div className="w-full sm:w-2/3">
+          <Slider {...settings} className="rounded-3xl shadow-lg w-full">
+            {items.map((item, index) => (
+              <div key={index} className="relative flex justify-center group px-2">
+                <img
+                  src={item.image}
+                  alt={item.description}
+                  className="w-96 h-auto object-contain rounded-3xl shadow-lg"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* Texto debajo de las imágenes */}
+        <div className="flex flex-col w-full sm:w-2/3 mt-8 sm:mt-10 mx-auto">
+          <div className="bg-white p-5 sm:p-10 rounded-lg shadow-lg max-w-full sm:max-w-2xl mx-auto">
+            <p className="text-md sm:text-lg md:text-2xl  sm:mb-6 text-black text-justify">
+              "Spotted at A's exclusive 21st birthday bash! The night is still young, but the gossip is already hotter than ever. Lights, cameras, and whispers all around. Stay tuned, darlings, because the real fun is just getting started."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección Party con Formulario */}
+      <section
+        id="party"
+        className="relative p-5 sm:p-10 min-h-screen bg-black smoke-effect flex items-center justify-center"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-100 to-black opacity-10 pointer-events-none animate-smoke"></div>
+
+        <div className="flex flex-col mb-36 sm:flex-row items-center sm:space-x-10 z-10 w-full max-w-6xl">
+          {/* Imagen de Gossip Girl */}
+          <div className="hidden sm:block w-full sm:w-1/2">
+            <img src="/collage1.jpg" alt="Gossip Girl" className="rounded-3xl shadow-lg w-3/4 object-cover" />
+          </div>
+
+          {/* Formulario estilo login */}
+          <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-1/2">
+            <h2 className="text-3xl font-bold text-center text-black mb-6">Attendance!</h2>
+            <p className="text-md sm:text-lg text-justify text-black mb-6">
+              The secret's out and you're invited to A's exclusive birthday party!
+            </p>
+            <form>
+              {/* Nombre */}
+              <div className="mb-4">
+                <label className="block text-lg font-medium text-gray-700" htmlFor="first-name">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  id="first-name"
+                  className="w-full p-3 border rounded-md shadow-sm bg-gray-50 text-gray-800 focus:ring-yellow-400 focus:border-yellow-400"
+                  placeholder="Enter your first name"
+                />
+              </div>
+
+              {/* Apellido */}
+              <div className="mb-4">
+                <label className="block text-lg font-medium text-gray-700" htmlFor="last-name">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  id="last-name"
+                  className="w-full p-3 border rounded-md shadow-sm bg-gray-50 text-gray-800 focus:ring-yellow-400 focus:border-yellow-400"
+                  placeholder="Enter your last name"
+                />
+              </div>
+
+              {/* Asistencia */}
+              <div className="mb-6">
+                <label className="block text-lg font-medium text-gray-700" htmlFor="attendance">
+                  Will you attend?
+                </label>
+                <select
+                  id="attendance"
+                  className="w-full p-3 border rounded-md shadow-sm bg-gray-50 text-gray-800 focus:ring-yellow-400 focus:border-yellow-400"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              {/* Botón Submit */}
+              <div>
+                <button
+                  type="submit"
+                  className="w-full p-3 bg-yellow-300 text-black font-bold rounded-md hover:bg-yellow-400"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {/* Información adicional: Hora y lugar */}
+        <div className="absolute bottom-10 lg: right-10 bg-transparent text-white font-bold text-lg sm: left-10 text-center animate-glow">
+          <p className="px-4 py-2 rounded-lg gossip-title text-2xl">October 27, 2024 | 5:00 PM | Cielo Rooftop Bar</p>
+        </div>
+      </section>
+
+      <footer className="bg-black text-white py-10">
+        <div className="container mx-auto px-5 sm:px-10">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-8 sm:space-y-0">
+            {/* Columna 1: Menú PDF */}
+            <div className="text-center sm:text-left">
+              <a
+                href="/cielo_menu.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center sm:justify-start text-yellow-300 hover:text-yellow-500"
+              >
+                <FaFilePdf className="mr-2 text-2xl" />
+                <span className="text-lg font-bold">Download Menu</span>
+              </a>
+            </div>
+
+            {/* Columna 2: Logo */}
+            <div className="text-center">
+              <h2 className="text-3xl font-bold italic gossip-title">gossip girl</h2>
+              <p className="text-sm text-gray-400 italic mt-2">
+                XOXO, see you at the party!
+              </p>
+            </div>
+
+            {/* Columna 3: Mapa de Google */}
+            <div className="text-center sm:text-right">
+              <a
+                href="https://maps.app.goo.gl/9RtnXcJrj6Ro4Nqt9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center sm:justify-end text-yellow-300 hover:text-yellow-500"
+              >
+                <FaMapMarkerAlt className="mr-2 text-2xl" />
+                <span className="text-lg font-bold">Find Us Here</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Línea divisora */}
+          <div className="mt-8 border-t border-gray-700"></div>
+
+          {/* Información adicional */}
+          <div className="mt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              © 2024 Gossip Girl Party | All Rights Reserved
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
