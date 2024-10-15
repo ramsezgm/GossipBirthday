@@ -47,7 +47,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-black text-white min-h-screen overflow-x-hidden">
       {/* Sección con imagen de fondo */}
       <div
         className="relative flex flex-col justify-center items-center h-[50vh] w-full"
