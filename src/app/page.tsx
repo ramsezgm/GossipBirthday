@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -12,6 +12,15 @@ interface CarouselItem {
 }
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    attendance: 'yes',
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
   const items: CarouselItem[] = [
     { image: '/ale6.jpg', description: 'Sixth image' },
     { image: '/ale3.jpg', description: 'Third image' },
@@ -46,6 +55,41 @@ export default function Home() {
     ],
   };
 
+  // Manejar cambios en los campos del formulario
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  // Manejar el envío del formulario
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/add-person', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setMessage('¡Los datos se enviaron correctamente!');
+        setFormData({ firstName: '', lastName: '', attendance: 'yes' });  // Limpiar formulario después del envío
+      } else {
+        setMessage(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      setMessage('Ocurrió un error al enviar el formulario.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-black text-white min-h-screen overflow-x-hidden">
       {/* Sección con imagen de fondo */}
@@ -59,7 +103,7 @@ export default function Home() {
       >
         {/* Gradiente */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
-        <h1 className="text-5xl sm:text-7xl md:text-9xl gossip-title relative z-10 pt-10 sm:pt-20">
+        <h1 className="text-5xl sm:text-7xl md:text-7xl gossip-title relative z-10 pt-10 sm:pt-20">
           gossip girl
         </h1>
         <nav className="py-5 sm:py-10 flex justify-evenly w-full text-md sm:text-lg md:text-xl text-white relative z-10 nav-bright">
@@ -110,7 +154,7 @@ export default function Home() {
         {/* Texto debajo de las imágenes */}
         <div className="flex flex-col w-full sm:w-2/3 mt-8 sm:mt-10 mx-auto">
           <div className="bg-white p-5 sm:p-10 rounded-lg shadow-lg max-w-full sm:max-w-2xl mx-auto">
-            <p className="text-md sm:text-lg md:text-2xl  sm:mb-6 text-black text-justify">
+            <p className="text-md sm:text-lg md:text-2xl sm:mb-6 text-black text-justify">
               "Spotted at A's exclusive 21st birthday bash! The night is still young, but the gossip is already hotter than ever. Lights, cameras, and whispers all around. Stay tuned, darlings, because the real fun is just getting started."
             </p>
           </div>
@@ -136,7 +180,7 @@ export default function Home() {
             <p className="text-md sm:text-lg text-justify text-black mb-6">
               The secret's out and you're invited to A's exclusive birthday party!
             </p>
-            <form>
+            <form onSubmit={handleSubmit}>
               {/* Nombre */}
               <div className="mb-4">
                 <label className="block text-lg font-medium text-gray-700" htmlFor="first-name">
@@ -144,22 +188,28 @@ export default function Home() {
                 </label>
                 <input
                   type="text"
-                  id="first-name"
+                  id="firstName"
                   className="w-full p-3 border rounded-md shadow-sm bg-gray-50 text-gray-800 focus:ring-yellow-400 focus:border-yellow-400"
                   placeholder="Enter your first name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
               {/* Apellido */}
               <div className="mb-4">
-                <label className="block text-lg font-medium text-gray-700" htmlFor="last-name">
+                <label className="block text-lg font-medium text-gray-700" htmlFor="lastName">
                   Last Name
                 </label>
                 <input
                   type="text"
-                  id="last-name"
+                  id="lastName"
                   className="w-full p-3 border rounded-md shadow-sm bg-gray-50 text-gray-800 focus:ring-yellow-400 focus:border-yellow-400"
                   placeholder="Enter your last name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
@@ -171,6 +221,8 @@ export default function Home() {
                 <select
                   id="attendance"
                   className="w-full p-3 border rounded-md shadow-sm bg-gray-50 text-gray-800 focus:ring-yellow-400 focus:border-yellow-400"
+                  value={formData.attendance}
+                  onChange={handleChange}
                 >
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
@@ -182,10 +234,14 @@ export default function Home() {
                 <button
                   type="submit"
                   className="w-full p-3 bg-yellow-300 text-black font-bold rounded-md hover:bg-yellow-400"
+                  disabled={loading}
                 >
-                  Submit
+                  {loading ? 'Submitting...' : 'Submit'}
                 </button>
               </div>
+
+              {/* Mostrar mensaje de éxito o error */}
+              {message && <p className="text-center mt-4 text-lg">{message}</p>}
             </form>
           </div>
         </div>
