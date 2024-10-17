@@ -79,3 +79,9 @@ body {
     0 0 40px rgba(255, 255, 255, 0.8),
     0 0 50px rgba(255, 255, 255, 0.8);
 }
+
+@media (min-width: 1024px) {
+  #party {
+    margin-top: 4rem; /* Aumenta el espacio entre la parte de "Attendance" y el slider */
+  }
+}
