@@ -26,6 +26,14 @@ body {
   }
 }
 
+.slick-slide img {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
 .gossip-title, .text-outlined {
   position: relative;
   color: white;
@@ -39,24 +47,6 @@ body {
 
   -webkit-text-stroke: 0.5px white; /* Contorno blanco más suave */
 }
-
-.gossip-title::before, .text-outlined::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.05),  /* Estela más ligera */
-    rgba(255, 255, 255, 0)
-  );
-  transform: translate(-50%, -50%);
-  filter: blur(5px);  /* Blur reducido */
-  z-index: -1;
-}
-
 
 .nav-bright a {
   text-shadow:
@@ -77,6 +67,17 @@ body {
 
 @media (min-width: 1024px) {
   #party {
-    margin-top: 4rem; /* Aumenta el espacio entre la parte de "Attendance" y el slider */
+    margin-top: 4rem;
   }
+}
+
+.slick-slide img {
+  outline: none !important; /* Elimina cualquier outline */
+  border: none !important;  /* Elimina cualquier borde */
+  box-shadow: none !important; /* Elimina sombras si las hay */
+  user-select: none !important;  /* Evita que el usuario seleccione accidentalmente las imágenes */
+}
+
+.slick-slide {
+  outline: none !important;  /* Elimina el focus outline del contenedor de las imágenes */
 }

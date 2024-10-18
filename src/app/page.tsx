@@ -138,13 +138,14 @@ export default function Home() {
 
         {/* Slider con las imágenes */}
         <div className="w-full sm:w-2/3">
-          <Slider {...settings} className="rounded-3xl shadow-lg w-full">
+          <Slider {...settings} className="rounded shadow w-full">
             {items.map((item, index) => (
               <div key={index} className="relative flex justify-center group px-2">
                 <img
                   src={item.image}
                   alt={item.description}
                   className="w-96 h-auto object-contain rounded-3xl shadow-lg"
+                  loading="lazy"
                 />
               </div>
             ))}
@@ -241,7 +242,19 @@ export default function Home() {
               </div>
 
               {/* Mostrar mensaje de éxito o error */}
-              {message && <p className="text-center mt-4 text-lg">{message}</p>}
+              {message && (
+                <div
+                  className={`mt-4 p-4 rounded-lg text-lg text-center font-bold ${
+                    message.includes('Error') ? 'bg-red-500 text-white' : 'bg-green-400 text-black'
+                  }`}
+                >
+                  {message.includes('Error') ? (
+                    <p>Oops! Something went wrong. Please try again.</p>
+                  ) : (
+                    <p>🎉 Your RSVP has been confirmed! We're so excited to see you at the party! XOXO, Gossip Girl 💋</p>
+                  )}
+                </div>
+              )}
             </form>
           </div>
         </div>
