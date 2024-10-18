@@ -26,20 +26,18 @@ body {
   }
 }
 
-/* Estilo de texto brillante con contorno y estela blanca */
 .gossip-title, .text-outlined {
   position: relative;
-  color: white; /* Texto blanco */
+  color: white;
   text-shadow:
-    0 0 1px rgba(255, 255, 255, 0.4),  /* Brillo más suave */
-    0 0 5px rgba(255, 255, 255, 0.4),
-    0 0 10px rgba(255, 255, 255, 0.5),
-    0 0 15px rgba(255, 255, 255, 0.5),
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 25px rgba(255, 255, 255, 0.6);
+    0 0 1px rgba(255, 255, 255, 0.2), /* Brillo más suave */
+    0 0 5px rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 25px rgba(255, 255, 255, 0.4);
 
-  /* Contorno blanco más sutil */
-  -webkit-text-stroke: 0.8px white;
+  -webkit-text-stroke: 0.5px white; /* Contorno blanco más suave */
 }
 
 .gossip-title::before, .text-outlined::before {
@@ -62,22 +60,19 @@ body {
 
 .nav-bright a {
   text-shadow:
-    0 0 2px rgba(255, 255, 255, 0.3),
+    0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 5px rgba(255, 255, 255, 0.2),
     0 0 10px rgba(255, 255, 255, 0.3),
-    0 0 15px rgba(255, 255, 255, 0.5),
-    0 0 20px rgba(255, 255, 255, 0.5),
-    0 0 30px rgba(255, 255, 255, 0.6),
-    0 0 40px rgba(255, 255, 255, 0.6);
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.4);
 }
 
 .nav-bright a:hover {
   text-shadow:
-    0 0 4px rgba(255, 255, 255, 0.6),
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 25px rgba(255, 255, 255, 0.7),
-    0 0 30px rgba(255, 255, 255, 0.7),
-    0 0 40px rgba(255, 255, 255, 0.8),
-    0 0 50px rgba(255, 255, 255, 0.8);
+    0 0 2px rgba(255, 255, 255, 0.4),
+    0 0 10px rgba(255, 255, 255, 0.4),
+    0 0 15px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 @media (min-width: 1024px) {
