@@ -114,53 +114,60 @@ export default function Home() {
       </div>
 
       {/* Sección Home */}
-      <section id="home" className="relative p-5 sm:p-10 md:p-20 space-y-8 flex flex-col sm:flex-row justify-center items-center min-h-screen bg-black smoke-effect">
+      <section id="home" className="relative p-8 sm:p-12 md:p-24 space-y-12 lg:space-y-0 flex flex-col lg:flex-row justify-center items-center min-h-screen bg-black smoke-effect">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-100 to-black opacity-10 pointer-events-none animate-smoke"></div>
-        <div className="relative flex items-start space-x-0 sm:space-x-10 md:space-x-20 max-w-4xl sm:max-w-7xl w-full z-10 flex-col sm:flex-row">
-          <div className="w-full sm:w-2/3">
-            <img src="ale1.jpg" alt="Image description" className="rounded-3xl shadow-lg w-full" />
+        
+        {/* Contenedor centrado */}
+        <div className="flex flex-col lg:flex-row justify-center items-center max-w-screen-xl mx-auto">
+          
+          {/* Imagen */}
+          <div className="relative flex w-full lg:w-2/3 md:w-full sm:w-full justify-center items-center">
+            <img src="ale1.jpg" alt="Image description" className="rounded-3xl shadow-lg w-full lg:w-4/5 md:w-full" />
           </div>
-          <div className="flex flex-col w-full sm:w-2/3 mt-10 sm:mt-44">
-            <h2 className="text-4xl sm:text-5xl md:text-7xl mb-4 sm:mb-8 text-center text-outlined">Happy Birthday, A!</h2>
-            <div className="bg-white p-5 sm:p-10 rounded-lg shadow-lg max-w-full sm:max-w-2xl">
-              <p className="text-md sm:text-lg md:text-2xl mb-4 sm:mb-6 text-black text-justify">
+
+          {/* Texto con tamaño más ajustado */}
+          <div className="flex flex-col w-full lg:w-1/2 mt-12 lg:mt-0 lg:ml-12 justify-center items-center lg:items-start text-center lg:text-left">
+            <h2 className="text-5xl sm:text-6xl lg:text-6xl mb-6 lg:mb-10 text-outlined">Happy Birthday, A!</h2>
+            <div className="bg-white p-5 sm:p-8 rounded-lg shadow-lg max-w-full lg:max-w-full">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-lg mb-6 sm:mb-8 text-black text-justify lg:text-left">
                 "Spotted! A spectacular party is approaching. Gossip Girl here, your one and only source into the scandalous lives of Panama's elite. The secret’s out, and it's a big one! A’s 21st birthday bash is said to be at... Stay tuned, darlings."
               </p>
             </div>
-            <p className="text-lg sm:text-2xl md:text-3xl mt-4 sm:mt-6 text-outlined">XOXO, Gossip Girl</p>
+            <p className="text-lg sm:text-xl lg:text-2xl mt-6 sm:mt-8 text-outlined">XOXO, Gossip Girl</p>
           </div>
+
         </div>
       </section>
 
       {/* Sección Pics replicada */}
-      <section id="pics" className="relative p-5 sm:p-10 md:p-20 space-y-8 flex flex-col sm:flex-col justify-center items-center min-h-screen bg-black smoke-effect">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-100 to-black opacity-10 pointer-events-none animate-smoke"></div>
+      <section id="pics" className="relative p-5 sm:p-10 md:p-20 space-y-8 flex flex-col justify-center items-center min-h-screen bg-black smoke-effect">
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-100 to-black opacity-10 pointer-events-none animate-smoke"></div>
 
-        {/* Slider con las imágenes */}
-        <div className="w-full sm:w-2/3">
-          <Slider {...settings} className="rounded shadow w-full">
-            {items.map((item, index) => (
-              <div key={index} className="relative flex justify-center group px-2">
-                <img
-                  src={item.image}
-                  alt={item.description}
-                  className="w-96 h-auto object-contain rounded-3xl shadow-lg"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </Slider>
+  {/* Slider con las imágenes */}
+  <div className="w-full sm:w-2/3 md:w-2/3 mx-auto">
+    <Slider {...settings} className="rounded shadow w-full">
+      {items.map((item, index) => (
+        <div key={index} className="relative flex justify-center group px-2">
+          <img
+            src={item.image}
+            alt={item.description}
+            className="w-full h-auto object-contain rounded-3xl shadow-lg"
+            loading="lazy"
+          />
         </div>
+      ))}
+    </Slider>
+  </div>
 
-        {/* Texto debajo de las imágenes */}
-        <div className="flex flex-col w-full sm:w-2/3 mt-8 sm:mt-10 mx-auto">
-          <div className="bg-white p-5 sm:p-10 rounded-lg shadow-lg max-w-full sm:max-w-2xl mx-auto">
-            <p className="text-md sm:text-lg md:text-2xl sm:mb-6 text-black text-justify">
-              "Spotted at A's exclusive 21st birthday bash! The night is still young, but the gossip is already hotter than ever. Lights, cameras, and whispers all around. Stay tuned, darlings, because the real fun is just getting started."
-            </p>
-          </div>
-        </div>
-      </section>
+  {/* Texto debajo de las imágenes */}
+  <div className="flex flex-col w-full sm:w-2/3 md:w-1/2 mt-8 mx-auto">
+    <div className="bg-white p-5 sm:p-10 rounded-lg shadow-lg max-w-full sm:max-w-2xl mx-auto">
+      <p className="text-md sm:text-lg md:text-2xl sm:mb-6 text-black text-justify">
+        "Spotted at A's exclusive 21st birthday bash! The night is still young, but the gossip is already hotter than ever. Lights, cameras, and whispers all around. Stay tuned, darlings, because the real fun is just getting started."
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* Sección Party con Formulario */}
       <section
